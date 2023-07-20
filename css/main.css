@@ -1,0 +1,236 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+:is(h1, h2, p, a) {
+  overflow-wrap: break-word;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+figure {
+  padding: 0;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+}
+button:focus {
+  outline: none;
+}
+
+img {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.icon,
+.toggle,
+.nav--list,
+.nav--link,
+.header--content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.container .header {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 4rem 80% 5rem;
+  place-items: center;
+  position: relative;
+  height: 100svh;
+}
+.container .header.background--image {
+  background: url("../image/medium-image-nasa.jpg") no-repeat center/cover;
+}
+.container .header.background--image::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.container .header--content {
+  flex-direction: column;
+  grid-row: 2;
+  grid-column: 1/-1;
+  z-index: 1;
+}
+.container .header--content :is(.heading, .header--info) {
+  margin: 0.5rem;
+  color: hsl(199, 24%, 92%);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.container .header--content .heading {
+  font-family: "Play", sans-serif;
+  font-size: clamp(3vw, 0.75vw + 0.6rem, 5rem);
+  text-transform: uppercase;
+}
+.container .header--content .header--info {
+  font-family: "Abel", sans-serif;
+  font-size: clamp(2vw, 1vw + 0.5rem, 4vw);
+}
+.container .header--content .header--info:first-letter {
+  text-transform: uppercase;
+}
+.container .header .info--container {
+  grid-row: 3;
+  grid-column: 3;
+}
+.container .header .info--container .info {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  -webkit-padding-end: 1.25rem;
+          padding-inline-end: 1.25rem;
+}
+.container .header .info--container .info p {
+  margin-block: 0.5rem;
+  font-family: "Abel", sans-serif;
+  color: hsl(199, 24%, 92%);
+}
+.container .header .info--container .info p a {
+  color: #3498f4;
+}
+.container .header .toggle--container {
+  grid-row: 1;
+  grid-column: 3;
+  position: relative;
+  right: -35%;
+  z-index: 2;
+}
+.container .header .toggle--container .toggle {
+  color: hsl(199, 24%, 92%);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.container .header .nav {
+  grid-column: 1;
+  width: 5rem;
+  height: 100svh;
+  position: fixed;
+  left: 0;
+  background-color: hsl(199, 24%, 92%);
+  transition: width 450ms cubic-bezier(0.94, 0.17, 0.15, 1.01);
+  overflow: hidden;
+  z-index: 2;
+}
+.container .header .nav.open {
+  width: 12rem;
+  transition: width 250ms cubic-bezier(0.74, 0.27, 0.5, 1.05);
+}
+.container .header .nav--list {
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  -webkit-padding-start: 1rem;
+          padding-inline-start: 1rem;
+  margin: 0;
+}
+.container .header .nav--list hr {
+  width: 80%;
+  margin: 0;
+}
+.container .header .nav--list .nav--item {
+  display: flex;
+  align-self: flex-start;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+}
+.container .header .nav--list .nav--item.active {
+  background-color: hsl(227, 55%, 12%);
+  position: relative;
+  border-radius: 5rem 0 0 5rem;
+}
+.container .header .nav--list .nav--item.active::before, .container .header .nav--list .nav--item.active::after {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+}
+.container .header .nav--list .nav--item.active::before {
+  top: -1rem;
+  border-bottom-right-radius: 5rem;
+  box-shadow: 0.2rem 0.2rem 0 0.15rem hsl(227, 55%, 12%);
+}
+.container .header .nav--list .nav--item.active::after {
+  bottom: -1rem;
+  border-top-right-radius: 5rem;
+  box-shadow: 0.2rem -0.2rem 0 0.15rem hsl(227, 55%, 12%);
+}
+.container .header .nav--list .nav--item.active .nav--link {
+  color: hsl(199, 24%, 92%);
+}
+.container .header .nav--list .nav--item.active .nav--link .icon {
+  transform: scale(1.05);
+  transition: 0.2s cubic-bezier(0.9, -0.02, 0.15, 0.98);
+}
+.container .header .nav--list .nav--item.active .nav--link .icon::after {
+  content: "";
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  border-radius: 50%;
+  background-color: hsl(0, 68%, 44%);
+  box-shadow: 0 0 0 0.2rem hsl(199, 24%, 92%) inset;
+  z-index: -1;
+}
+.container .header .nav--list .nav--item .nav--link {
+  padding: 1rem;
+  gap: 0 2rem;
+  position: relative;
+  color: hsl(227, 55%, 12%);
+}
+.container .header .nav--list .nav--item .nav--link .icon {
+  z-index: 2;
+}
+.container .header .nav--list .nav--item .nav--link .text {
+  font-family: "Play", sans-serif;
+  text-transform: capitalize;
+  opacity: 0;
+  transition: opacity 450ms cubic-bezier(0.94, 0.17, 0.15, 1.01);
+}
+.container .header .nav--list .nav--item .nav--link .text.open {
+  opacity: 1;
+  transition: opacity 300ms cubic-bezier(0.94, 0.17, 0.15, 1.01);
+}/*# sourceMappingURL=main.css.map */
